@@ -8,27 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		A611BAE41EBA3EB70001F3F6 /* BuildCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611BAE31EBA3EB70001F3F6 /* BuildCardList.swift */; };
-		A617B21A1DD13A2E00DA96F5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A617B2191DD13A2E00DA96F5 /* SwiftyJSON.swift */; };
-		A617B21C1DD13A5F00DA96F5 /* CardJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A617B21B1DD13A5F00DA96F5 /* CardJSON.swift */; };
 		A6667D1F1ED4995000A27BDD /* GameSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6667D1E1ED4995000A27BDD /* GameSettingsVC.swift */; };
 		A6AB44151DC3968E003CB8C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AB44141DC3968E003CB8C6 /* AppDelegate.swift */; };
 		A6AB44171DC3968E003CB8C6 /* PlayCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AB44161DC3968E003CB8C6 /* PlayCardVC.swift */; };
 		A6AB441A1DC3968E003CB8C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6AB44181DC3968E003CB8C6 /* Main.storyboard */; };
-		A6AB441D1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6AB441B1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodeld */; };
 		A6AB441F1DC3968E003CB8C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6AB441E1DC3968E003CB8C6 /* Assets.xcassets */; };
 		A6AB44221DC3968E003CB8C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6AB44201DC3968E003CB8C6 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A611BAE31EBA3EB70001F3F6 /* BuildCardList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildCardList.swift; sourceTree = "<group>"; };
-		A617B2191DD13A2E00DA96F5 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		A617B21B1DD13A5F00DA96F5 /* CardJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardJSON.swift; sourceTree = "<group>"; };
 		A6667D1E1ED4995000A27BDD /* GameSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettingsVC.swift; sourceTree = "<group>"; };
 		A6AB44111DC3968E003CB8C6 /* DeutschTaboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeutschTaboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6AB44141DC3968E003CB8C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A6AB44161DC3968E003CB8C6 /* PlayCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCardVC.swift; sourceTree = "<group>"; };
 		A6AB44191DC3968E003CB8C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A6AB441C1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeutschTaboo.xcdatamodel; sourceTree = "<group>"; };
 		A6AB441E1DC3968E003CB8C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6AB44211DC3968E003CB8C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A6AB44231DC3968E003CB8C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,9 +90,6 @@
 				A6AB44201DC3968E003CB8C6 /* LaunchScreen.storyboard */,
 				A6AB44141DC3968E003CB8C6 /* AppDelegate.swift */,
 				A6AB44231DC3968E003CB8C6 /* Info.plist */,
-				A6AB441B1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodeld */,
-				A617B2191DD13A2E00DA96F5 /* SwiftyJSON.swift */,
-				A617B21B1DD13A5F00DA96F5 /* CardJSON.swift */,
 			);
 			path = DeutschTaboo;
 			sourceTree = "<group>";
@@ -176,12 +167,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6AB441D1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodeld in Sources */,
 				A6AB44171DC3968E003CB8C6 /* PlayCardVC.swift in Sources */,
 				A6AB44151DC3968E003CB8C6 /* AppDelegate.swift in Sources */,
-				A617B21C1DD13A5F00DA96F5 /* CardJSON.swift in Sources */,
 				A6667D1F1ED4995000A27BDD /* GameSettingsVC.swift in Sources */,
-				A617B21A1DD13A2E00DA96F5 /* SwiftyJSON.swift in Sources */,
 				A611BAE41EBA3EB70001F3F6 /* BuildCardList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,19 +339,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A6AB441B1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A6AB441C1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodel */,
-			);
-			currentVersion = A6AB441C1DC3968E003CB8C6 /* DeutschTaboo.xcdatamodel */;
-			path = DeutschTaboo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A6AB44091DC3968E003CB8C6 /* Project object */;
 }

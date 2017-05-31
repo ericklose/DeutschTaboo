@@ -88,12 +88,12 @@ class PlayCardVC: UIViewController {
     
     func displayCard() {
         activeCard = gameDeck.randomCard
-        print("ACTIVE: ", gameDeck.gameDeck[activeCard])
+        print("ACTIVE: ", gameDeck.gameDeck[activeCard] ?? "")
         hauptWort.text = activeCard
         verbotenList.text = ""
         
         if gameDeck.gameDeck.isEmpty {
-            print("IS THIS A THING: ", gameDeck.gameDeck[activeCard])
+            print("IS THIS A THING: ", gameDeck.gameDeck[activeCard] ?? "")
         } else {
             for wordList in gameDeck.gameDeck[activeCard]! {
                 verbotenList.text = verbotenList.text! + "\n \(wordList)"

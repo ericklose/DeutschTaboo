@@ -52,7 +52,7 @@ class BuildCardList {
         let task = URLSession.shared.dataTask(with: request as URLRequest) { data,response,error in
             guard error == nil && data != nil else
             {
-                print("Error:",error)
+                print("Error:",error ?? "Some Error Happened")
                 return
             }
             
