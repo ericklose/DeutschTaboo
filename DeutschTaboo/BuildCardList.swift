@@ -11,123 +11,91 @@ import Foundation
 class BuildCardList {
     
     private var _URL: String!
-    //    private var _hauptWort: String!
-    //    private var _verbotenList: [String]!
-    private var _gameDeck: Dictionary<String, [String]>!
+    private var _gameDeck = [String: [String]]()
     
+    var hauptWortSet = Set<String>()
     
     var gameDeck: Dictionary<String, [String]> {
-        if _gameDeck == nil {
-            _gameDeck = ["der Hund": ["die Katze", "bestes Freund", "das Haustier", "der Wolf"], "die Sonne": ["der Stern", "der Himmel", "heiß", "feuer", "Atomkraft"]]
-        }
-        _gameDeck = ["die Frau": ["der Sex", "die Freundin", "Kocherin", "das Madchen"]]
         return _gameDeck
     }
     
     var URL: String! {
         if _URL == nil {
-            _URL = "???"
+            _URL = "http://hollyanderic.com/TabooServer/cards.php"
         }
         return _URL
     }
     
-    init(difficulty: Int) {
-        //        Go fetch data from server
-
+    var randomCard: String {
+        if gameDeck.count > 0 {
+            let index: Int = Int(arc4random_uniform(UInt32(_gameDeck.count)))
+            let key = Array(gameDeck.keys)[index]
+            return key
+        } else {
+            return ""
+        }
     }
     
+    init(difficulty: Int) {
+        downloadData(difficulty: difficulty)
+    }
     
+    func removePlayedCard(card: String!) {
+        _gameDeck.removeValue(forKey: card)
+    }
     
+    func downloadData(difficulty: Int) {
+        let url = NSURL(string: URL)
+        
+        let request = NSMutableURLRequest(url: url! as URL)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { data,response,error in
+            guard error == nil && data != nil else
+            {
+                print("Error:",error)
+                return
+            }
+            
+            let httpStatus = response as? HTTPURLResponse
+            
+            if httpStatus!.statusCode == 200
+            {
+                if data?.count != 0
+                {
+                    if let responseString = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSArray  {
+                        for jsonItem in responseString {
+                            if let extraArray = jsonItem as? NSDictionary {
+                                let mainWord = extraArray["cdMain"] as! String
+                                let mainDiff1 = extraArray["cdLevel"] as! String
+                                let mainDiff2: Int = Int(mainDiff1)!
+                                if mainDiff2 <= difficulty || mainDiff2 == 1 {
+                                    self.hauptWortSet.insert(mainWord)
+                                }
+                            }
+                        }
+                        for eachHauptWort in self.hauptWortSet {
+                            var tempHauptWortArray: [String] = []
+                            for jsonItem in responseString {
+                                if let eachCard = jsonItem as? NSDictionary {
+                                    if eachCard["cdMain"] as! String == eachHauptWort {
+                                        let hintDiff1 = eachCard["cdHintLevel"] as! String
+                                        let hintDiff2: Int = Int(hintDiff1)!
+                                        if hintDiff2 <= difficulty {
+                                            let newHint = eachCard["cdHint"] as! String
+                                            tempHauptWortArray.append(newHint)
+                                        }
+                                    }
+                                }
+                                self._gameDeck[eachHauptWort] = tempHauptWortArray
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        print("DECK STATUS: ", self._gameDeck)
+
+        task.resume()
+    }
     
-    
-    
-    
-    //    var hasherPrimaryHashName: String {
-    //        if _hasherId == "-KFpS2L7kSm6oaUsC8Ss" {
-    //            let wikiNameArray = [
-    //                "Wikipediphilia",
-    //                "Wikkipedaphilia",
-    //                "Weekeepediphillia",
-    //                "Wikipedifeelia",
-    //                "Wikiipeedafelia",
-    //                "Wikipedifilia",
-    //                "Wickiepedddaphilia",
-    //                "Wikipedipheliya"
-    //            ]
-    //            let randomIndex = Int(arc4random_uniform(UInt32(wikiNameArray.count)))
-    //            return wikiNameArray[randomIndex]
-    //        } else if _hasherPrimaryHashName != nil {
-    //            return _hasherPrimaryHashName
-    //        } else {
-    //            return "Has no primary hash name"
-    //        }
-    //    }
-    
-    //    init (hasherInitId: String, hasherInitDict: Dictionary<String, AnyObject>) {
-    //        self._hasherId = hasherInitId
-    //
-    //        if let hasherInitNerdName = hasherInitDict["hasherNerdName"] as? String {
-    //            self._hasherNerdName = hasherInitNerdName
-    //        }
-    //
-    //        if let hasherPrimaryHashName = hasherInitDict["hasherPrimaryHashName"] as? String {
-    //            self._hasherPrimaryHashName = hasherPrimaryHashName
-    //        }
-    //
-    //        if let hasherPrimaryKennel = hasherInitDict["hasherPrimaryKennel"] as? String {
-    //            self._hasherPrimaryKennel = hasherPrimaryKennel
-    //        }
-    //
-    //        self._hasherUrl = DataService.ds.REF_HASHERS.child(self.hasherId)
-    //    }
-    
-    
-    
-    ////For future downloads
-    //    func downloadWeatherForecast(completed: DownloadComplete) {
-    //
-    //        let url = NSURL(string: _URL)!
-    //
-    //        Alamofire.request(.GET, url).responseJSON { response in
-    //            let result = response.result
-    //
-    //
-    //            if let dict = result.value as? Dictionary<String, AnyObject> {
-    //
-    //                if let main = dict["main"] as? Dictionary<String, AnyObject> {
-    //
-    //                    if let temp = main["temp"] as? Double {
-    //                        self._currentTemp = "\(temp)"
-    //                        print("temp: \(self._currentTemp)")
-    //                    }
-    //
-    //                }
-    //
-    //
-    //                if let weather = dict["weather"] as? [Dictionary<String, AnyObject>] {
-    //                    if let weatherIcon = weather[0]["id"] {
-    //                        self._weatherIcon = "\(weatherIcon).png"
-    //                        print("icon: \(self.weatherIcon)")
-    //                    }
-    //
-    //                    if let description = weather[0]["description"] {
-    //                        self._currentWeather = "\(description.capitalizedString)"
-    //                        print("weather: \(self._currentWeather)")
-    //                    }
-    //                    if  weather.count > 1 {
-    //                        for var x = 1; x < weather.count; x++ {
-    //                            if let description = weather[x]["description"] {
-    //                                self._currentWeather! += ", \(description.capitalizedString)"
-    //                                print("weather: \(self._currentWeather)")
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //            completed()
-    //            
-    //            
-    //            
-    //        }
-    //    }
 }
