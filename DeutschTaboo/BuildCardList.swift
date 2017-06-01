@@ -65,8 +65,8 @@ class BuildCardList {
                     if let responseString = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSArray  {
                         for jsonItem in responseString {
                             if let extraArray = jsonItem as? NSDictionary {
-                                let mainWord = extraArray["cdMain"] as! String
-                                let mainDiff1 = extraArray["cdLevel"] as! String
+                                let mainWord = extraArray["twWord"] as! String
+                                let mainDiff1 = extraArray["twDifficulty"] as! String
                                 let mainDiff2: Int = Int(mainDiff1)!
                                 if mainDiff2 <= difficulty || mainDiff2 == 1 {
                                     self.hauptWortSet.insert(mainWord)
@@ -77,12 +77,14 @@ class BuildCardList {
                             var tempHauptWortArray: [String] = []
                             for jsonItem in responseString {
                                 if let eachCard = jsonItem as? NSDictionary {
-                                    if eachCard["cdMain"] as! String == eachHauptWort {
-                                        let hintDiff1 = eachCard["cdHintLevel"] as! String
-                                        let hintDiff2: Int = Int(hintDiff1)!
-                                        if hintDiff2 <= difficulty {
-                                            let newHint = eachCard["cdHint"] as! String
-                                            tempHauptWortArray.append(newHint)
+                                    if eachCard["twWord"] as! String == eachHauptWort {
+                                        if let bannedWord = eachCard["bwWord"] as? String {
+                                            let hintDiff1 = eachCard["bwDifficulty"] as! String
+                                            let hintDiff2: Int = Int(hintDiff1)!
+                                            if hintDiff2 <= difficulty {
+                                                let newHint = bannedWord
+                                                tempHauptWortArray.append(newHint)
+                                            }
                                         }
                                     }
                                 }
@@ -93,8 +95,6 @@ class BuildCardList {
                 }
             }
         }
-        print("DECK STATUS: ", self._gameDeck)
-
         task.resume()
     }
     
