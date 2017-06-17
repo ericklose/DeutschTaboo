@@ -6,46 +6,45 @@
 //  Copyright © 2017 Eric Klose. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class BuildCardList {
     
-    private var _URL: String!
-    private var _gameDeck = [String: [String]]()
+    private var _gameDeck = [PlayingCard]()
+    private var _jsonResults: NSArray?
+    private var _randomCard: PlayingCard!
     
+    var gameCard: PlayingCard!
     var hauptWortSet = Set<String>()
     
-    var gameDeck: Dictionary<String, [String]> {
+    var jsonResults: NSArray? {
+        return _jsonResults
+    }
+    
+    var gameDeck: [PlayingCard] {
         return _gameDeck
     }
     
-    var URL: String! {
-        if _URL == nil {
-            _URL = "http://hollyanderic.com/TabooServer/cards.php"
-        }
-        return _URL
+    func drawRandomCard() -> PlayingCard {
+        let randomIndex = arc4random_uniform(UInt32(_gameDeck.count))
+        _randomCard = _gameDeck.remove(at: Int(randomIndex))
+        return _randomCard
     }
     
-    var randomCard: String {
-        if gameDeck.count > 0 {
-            let index: Int = Int(arc4random_uniform(UInt32(_gameDeck.count)))
-            let key = Array(gameDeck.keys)[index]
-            return key
-        } else {
-            return ""
-        }
+    func purgeDeck() {
+        _gameDeck.removeAll()
     }
     
-    init(difficulty: Int) {
-        downloadData(difficulty: difficulty)
+    init(language: String, difficulty: Int, englishHints: Bool) {
+        downloadData(language: language, completed: {
+            self.parseJSON(difficulty: difficulty, englishHints: englishHints)
+        })
+        parseJSON(difficulty: difficulty, englishHints: englishHints)
     }
     
-    func removePlayedCard(card: String!) {
-        _gameDeck.removeValue(forKey: card)
-    }
-    
-    func downloadData(difficulty: Int) {
-        let url = NSURL(string: URL)
+    func downloadData(language: String, completed: @escaping DownloadComplete) {
+        let url = NSURL(string: "http://hollyanderic.com/TabooServer/cards2.php?language=\(language)")
         
         let request = NSMutableURLRequest(url: url! as URL)
         
@@ -63,39 +62,29 @@ class BuildCardList {
                 if data?.count != 0
                 {
                     if let responseString = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSArray  {
-                        for jsonItem in responseString {
-                            if let extraArray = jsonItem as? NSDictionary {
-                                let mainWord = extraArray["twWord"] as! String
-                                let mainDiff1 = extraArray["twDifficulty"] as! String
-                                let mainDiff2: Int = Int(mainDiff1)!
-                                if mainDiff2 <= difficulty || mainDiff2 == 1 {
-                                    self.hauptWortSet.insert(mainWord)
-                                }
-                            }
-                        }
-                        for eachHauptWort in self.hauptWortSet {
-                            var tempHauptWortArray: [String] = []
-                            for jsonItem in responseString {
-                                if let eachCard = jsonItem as? NSDictionary {
-                                    if eachCard["twWord"] as! String == eachHauptWort {
-                                        if let bannedWord = eachCard["bwWord"] as? String {
-                                            let hintDiff1 = eachCard["bwDifficulty"] as! String
-                                            let hintDiff2: Int = Int(hintDiff1)!
-                                            if hintDiff2 <= difficulty {
-                                                let newHint = bannedWord
-                                                tempHauptWortArray.append(newHint)
-                                            }
-                                        }
-                                    }
-                                }
-                                self._gameDeck[eachHauptWort] = tempHauptWortArray
-                            }
+                        self._jsonResults = responseString
+                        
+                    }
+                }
+            }
+            completed()
+        }
+        task.resume()
+    }
+    
+    func parseJSON(difficulty: Int, englishHints: Bool) {
+        if let jsonItem = jsonResults {
+            for jsonItem in jsonResults! {
+                if let aCardDict = jsonItem as? NSDictionary {
+                    if let twDictDifficulty = aCardDict["twDifficulty"] as? String {
+                        if (Int(twDictDifficulty)! <= difficulty || Int(twDictDifficulty)! == 1) {
+                            print("DICT ", aCardDict)
+                            let addedCard = PlayingCard(aCardDict: aCardDict)
+                            self._gameDeck.append(addedCard)
                         }
                     }
                 }
             }
         }
-        task.resume()
     }
-    
 }

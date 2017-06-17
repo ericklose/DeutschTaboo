@@ -8,42 +8,76 @@
 
 import UIKit
 
-class GameSettingsVC: UIViewController {
+class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     
     @IBOutlet weak var schwierigkeitLbl: UILabel!    
     @IBOutlet weak var schwierigkeitSlider: UISlider!
     @IBOutlet weak var zeitInput: UITextField!
+    @IBOutlet weak var englishHints: UISwitch!
+    @IBOutlet weak var gesprachPicker: UIPickerView!
     
     var schwierigkeit: Int!
     var roundTime: Int!
+    var pickerDataSource = ["Deutsch", "Francais", "English"]
+    var gesprach: String!
+    var englishHintsOn: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.gesprachPicker.dataSource = self
+        self.gesprachPicker.delegate = self
 
+        gesprachPicker.selectRow(pickerDataSource.index(of: gesprach)!, inComponent: 0, animated: true)
+        englishHints.isOn = englishHintsOn
         zeitInput.text = String(roundTime)
         schwierigkeitSlider.value = Float(schwierigkeit)
         schwierigkeitLbl.text = String(schwierigkeit)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.gesprachPicker.reloadAllComponents()
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         let selectedValue = Int(sender.value)
         schwierigkeitLbl.text = String(stringInterpolationSegment: selectedValue)
     }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource.count
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerDataSource[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        gesprach = pickerDataSource[row]
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToGame" {
             if let playCardVC = segue.destination as? PlayCardVC {
-                print("SEGUE:: ", self.schwierigkeit, " & Zeit: ", self.zeitInput)
                 let newTime = self.zeitInput.text
                 playCardVC.roundTime = Double(newTime!)
                 playCardVC.schwierigkeit = Int(self.schwierigkeitSlider.value)
+                playCardVC.language = gesprach
+                playCardVC.englishHints = englishHintsOn
             }
         }
     }
     
+    @IBAction func englishHintsToggle(_ sender: UISwitch) {
+        englishHintsOn = englishHints.isOn
+    }
+    
     @IBAction func settingsGenauBtn(_ sender: UIButton) {
         self.performSegue(withIdentifier: "backToGame", sender: self)
-    }    
+    }
 
 }

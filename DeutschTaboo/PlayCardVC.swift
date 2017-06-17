@@ -20,7 +20,6 @@ class PlayCardVC: UIViewController {
     @IBOutlet weak var timerDisplay: UILabel!
     
     var gameDeck: BuildCardList!
-    var gameCard: Dictionary<String, [String]>!
     var scoreTeamA: Int = 0
     var scoreTeamB: Int = 0
     var activeTeam: Bool!
@@ -28,7 +27,9 @@ class PlayCardVC: UIViewController {
     var roundTime: Double!
     var startTime = Date.timeIntervalSinceReferenceDate
     var schwierigkeit: Int!
-    var activeCard: String!
+    var activeCard: PlayingCard!
+    var englishHints: Bool = false
+    var language: String = "Francais"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,11 @@ class PlayCardVC: UIViewController {
         activeTeam = true
         timerDisplay.text = String(Int(roundTime))
         
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            self.gameDeck = BuildCardList.init(language: self.language, difficulty: self.schwierigkeit, englishHints: self.englishHints)
+            return
+        }
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,8 +68,7 @@ class PlayCardVC: UIViewController {
         scoreTeamB = 0
         activeTeam = true
         
-        gameDeck = BuildCardList.init(difficulty: schwierigkeit)
-        
+            self.gameDeck.parseJSON(difficulty: self.schwierigkeit, englishHints: self.englishHints)
     }
     
     func runTimer() {
@@ -87,17 +92,26 @@ class PlayCardVC: UIViewController {
     }
     
     func displayCard() {
-        activeCard = gameDeck.randomCard
-        print("ACTIVE: ", gameDeck.gameDeck[activeCard] ?? "")
-        hauptWort.text = activeCard
+        if gameDeck.gameDeck.count > 0 {
+        activeCard = gameDeck.drawRandomCard()
+        } else {
+            endRound(reason: "cardsOut")
+        }
+
+        
+        hauptWort.text = activeCard.targetWord
         verbotenList.text = ""
         
-        if gameDeck.gameDeck.isEmpty {
-            print("IS THIS A THING: ", gameDeck.gameDeck[activeCard] ?? "")
+        if activeCard.bannedWords.isEmpty {
+            print("No banned words")
         } else {
-            for wordList in gameDeck.gameDeck[activeCard]! {
-                verbotenList.text = verbotenList.text! + "\n \(wordList)"
-            }
+            for bannedWord in activeCard.bannedWords {
+                if (bannedWord.bwDifficulty <= schwierigkeit) {
+                verbotenList.text = verbotenList.text! + "\n \(bannedWord.bwWord)"
+                } else {
+                    print("banned word too hard")
+                }
+                }
         }
         
         aTeamScoreLbl.text = "\(scoreTeamA)"
@@ -132,7 +146,6 @@ class PlayCardVC: UIViewController {
             let alertController = UIAlertController(title: "Runde Beendet", message: "gibt das Handy über", preferredStyle: .alert)
             let fertig = UIAlertAction(title: "Fertig & Weiter", style: .default, handler: { (action) -> Void in
                 self.runTimer()
-                self.removeCurrentCard(card: self.activeCard)
                 self.displayCard()
             })
             let storen = UIAlertAction(title: "Spiele Ende", style: .default, handler: { (action) -> Void in
@@ -172,7 +185,9 @@ class PlayCardVC: UIViewController {
     func popStartAlert() {
         let alertController = UIAlertController(title: "Bereits Zu Beginn?", message: "", preferredStyle: .alert)
         let los = UIAlertAction(title: "Los!", style: .default, handler: { (action) -> Void in
+            
             self.startRound()
+            
         })
         let spielEinzelheiten = UIAlertAction(title: "Spiel Einzelheiten", style: .default, handler: { (action) -> Void in
             self.performSegue(withIdentifier: "spielSettings", sender: nil)
@@ -187,20 +202,11 @@ class PlayCardVC: UIViewController {
             if let gameSettingsVC = segue.destination as? GameSettingsVC {
                 gameSettingsVC.roundTime = Int(self.roundTime)
                 gameSettingsVC.schwierigkeit = self.schwierigkeit
+                gameSettingsVC.englishHintsOn = self.englishHints
+                gameSettingsVC.gesprach = self.language
             }
         }
     }
-    
-    func removeCurrentCard(card: String!) {
-        if gameDeck.gameDeck.count > 1 {
-            gameDeck.removePlayedCard(card: card)
-        } else {
-            gameDeck.removePlayedCard(card: card)
-            endRound(reason: "cardsOut")
-        }
-    }
-    
-    
     
     @IBAction func misserfolgGetippt(_ sender: UIButton) {
         
@@ -211,7 +217,6 @@ class PlayCardVC: UIViewController {
                 scoreTeamB = scoreTeamB - 1
             }
         }
-        removeCurrentCard(card: activeCard)
         displayCard()
     }
     
@@ -224,7 +229,6 @@ class PlayCardVC: UIViewController {
                 scoreTeamB = scoreTeamB + 1
             }
         }
-        removeCurrentCard(card: activeCard)
         displayCard()
     }
     
