@@ -34,18 +34,15 @@ class BannedWord {
     init(bannedWordDict: NSDictionary) {
         if bannedWordDict["bwWord"] != nil {
             self._bwWord = bannedWordDict["bwWord"] as? String
-            print("BW = ", _bwWord)
         }
         
         if let bwDictDifficulty = bannedWordDict["bwDifficulty"] as? String {
             self._bwDifficulty = Int(bwDictDifficulty)
-//            print("BW DIFF: ", bannedWordDict["bwDifficulty"], " ++ ", _bwDifficulty)
         }
 
         
         if let bwDictEnglish = bannedWordDict["bwEnglish"] as? String {
             self._bwEnglishHint = bwDictEnglish
-//            print("BW ENGL ", bannedWordDict["bwEnglish"], " && ", _bwEnglishHint)
         }
         
     }

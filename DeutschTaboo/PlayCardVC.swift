@@ -44,11 +44,8 @@ class PlayCardVC: UIViewController {
         activeTeam = true
         timerDisplay.text = String(Int(roundTime))
         
-        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-            self.gameDeck = BuildCardList.init(language: self.language, difficulty: self.schwierigkeit, englishHints: self.englishHints)
-            return
-        }
-    
+            gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +65,7 @@ class PlayCardVC: UIViewController {
         scoreTeamB = 0
         activeTeam = true
         
-            self.gameDeck.parseJSON(difficulty: self.schwierigkeit, englishHints: self.englishHints)
+        gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints)
     }
     
     func runTimer() {
@@ -93,25 +90,18 @@ class PlayCardVC: UIViewController {
     
     func displayCard() {
         if gameDeck.gameDeck.count > 0 {
-        activeCard = gameDeck.drawRandomCard()
+            activeCard = gameDeck.drawRandomCard()
         } else {
             endRound(reason: "cardsOut")
         }
-
         
         hauptWort.text = activeCard.targetWord
         verbotenList.text = ""
         
-        if activeCard.bannedWords.isEmpty {
-            print("No banned words")
-        } else {
-            for bannedWord in activeCard.bannedWords {
-                if (bannedWord.bwDifficulty <= schwierigkeit) {
+        for bannedWord in activeCard.bannedWords {
+            if (bannedWord.bwDifficulty <= schwierigkeit) {
                 verbotenList.text = verbotenList.text! + "\n \(bannedWord.bwWord)"
-                } else {
-                    print("banned word too hard")
-                }
-                }
+            }
         }
         
         aTeamScoreLbl.text = "\(scoreTeamA)"
@@ -210,24 +200,20 @@ class PlayCardVC: UIViewController {
     
     @IBAction func misserfolgGetippt(_ sender: UIButton) {
         
-        if gameDeck.gameDeck.count > 0 {
-            if activeTeam == true {
-                scoreTeamA = scoreTeamA - 1
-            } else {
-                scoreTeamB = scoreTeamB - 1
-            }
+        if activeTeam == true {
+            scoreTeamA = scoreTeamA - 1
+        } else {
+            scoreTeamB = scoreTeamB - 1
         }
         displayCard()
     }
     
     @IBAction func bestatigungGetippt(_ sender: UIButton) {
         
-        if gameDeck.gameDeck.count > 0 {
-            if activeTeam == true {
-                scoreTeamA = scoreTeamA + 1
-            } else {
-                scoreTeamB = scoreTeamB + 1
-            }
+        if activeTeam == true {
+            scoreTeamA = scoreTeamA + 1
+        } else {
+            scoreTeamB = scoreTeamB + 1
         }
         displayCard()
     }

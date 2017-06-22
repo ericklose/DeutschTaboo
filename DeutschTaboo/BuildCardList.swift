@@ -27,6 +27,7 @@ class BuildCardList {
     }
     
     func drawRandomCard() -> PlayingCard {
+        print("Deck Count: ", _gameDeck.count)
         let randomIndex = arc4random_uniform(UInt32(_gameDeck.count))
         _randomCard = _gameDeck.remove(at: Int(randomIndex))
         return _randomCard
@@ -40,7 +41,6 @@ class BuildCardList {
         downloadData(language: language, completed: {
             self.parseJSON(difficulty: difficulty, englishHints: englishHints)
         })
-        parseJSON(difficulty: difficulty, englishHints: englishHints)
     }
     
     func downloadData(language: String, completed: @escaping DownloadComplete) {
@@ -78,7 +78,6 @@ class BuildCardList {
                 if let aCardDict = jsonItem as? NSDictionary {
                     if let twDictDifficulty = aCardDict["twDifficulty"] as? String {
                         if (Int(twDictDifficulty)! <= difficulty || Int(twDictDifficulty)! == 1) {
-                            print("DICT ", aCardDict)
                             let addedCard = PlayingCard(aCardDict: aCardDict)
                             self._gameDeck.append(addedCard)
                         }

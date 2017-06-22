@@ -64,7 +64,6 @@ class PlayingCard {
         if let bannedWordsDict = aCardDict["bannedWords"] as? [NSDictionary] {
             for i in bannedWordsDict {
                 if let _ = i["bwWord"] as? String {
-                    print("i Dict = ", i)
                 _bannedWords.append(BannedWord(bannedWordDict: i))
             }
             }
