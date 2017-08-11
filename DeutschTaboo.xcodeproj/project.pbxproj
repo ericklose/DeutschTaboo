@@ -10,6 +10,8 @@
 		A611BAE41EBA3EB70001F3F6 /* BuildCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611BAE31EBA3EB70001F3F6 /* BuildCardList.swift */; };
 		A646E3691EE886BC00E4B9D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A646E3681EE886BC00E4B9D3 /* Constants.swift */; };
 		A6667D1F1ED4995000A27BDD /* GameSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6667D1E1ED4995000A27BDD /* GameSettingsVC.swift */; };
+		A69B089D1EFC29B300A0AA9C /* EditCardsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69B089C1EFC29B300A0AA9C /* EditCardsVC.swift */; };
+		A69B089F1EFDBE0900A0AA9C /* EditBannedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69B089E1EFDBE0900A0AA9C /* EditBannedCell.swift */; };
 		A69C710C1EE9768300C70F91 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69C710B1EE9768300C70F91 /* PlayingCard.swift */; };
 		A6A231661EF3F2FE00625B19 /* BannedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A231651EF3F2FE00625B19 /* BannedWord.swift */; };
 		A6AB44151DC3968E003CB8C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6AB44141DC3968E003CB8C6 /* AppDelegate.swift */; };
@@ -23,6 +25,8 @@
 		A611BAE31EBA3EB70001F3F6 /* BuildCardList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildCardList.swift; sourceTree = "<group>"; };
 		A646E3681EE886BC00E4B9D3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A6667D1E1ED4995000A27BDD /* GameSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettingsVC.swift; sourceTree = "<group>"; };
+		A69B089C1EFC29B300A0AA9C /* EditCardsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardsVC.swift; path = ../EditCardsVC.swift; sourceTree = "<group>"; };
+		A69B089E1EFDBE0900A0AA9C /* EditBannedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBannedCell.swift; sourceTree = "<group>"; };
 		A69C710B1EE9768300C70F91 /* PlayingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		A6A231651EF3F2FE00625B19 /* BannedWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannedWord.swift; sourceTree = "<group>"; };
 		A6AB44111DC3968E003CB8C6 /* DeutschTaboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeutschTaboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +64,7 @@
 			children = (
 				A6AB44161DC3968E003CB8C6 /* PlayCardVC.swift */,
 				A6667D1E1ED4995000A27BDD /* GameSettingsVC.swift */,
+				A69B089C1EFC29B300A0AA9C /* EditCardsVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -68,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				A6AB44181DC3968E003CB8C6 /* Main.storyboard */,
+				A69B089E1EFDBE0900A0AA9C /* EditBannedCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -176,8 +182,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A69B089D1EFC29B300A0AA9C /* EditCardsVC.swift in Sources */,
 				A646E3691EE886BC00E4B9D3 /* Constants.swift in Sources */,
 				A6AB44171DC3968E003CB8C6 /* PlayCardVC.swift in Sources */,
+				A69B089F1EFDBE0900A0AA9C /* EditBannedCell.swift in Sources */,
 				A6AB44151DC3968E003CB8C6 /* AppDelegate.swift in Sources */,
 				A6667D1F1ED4995000A27BDD /* GameSettingsVC.swift in Sources */,
 				A69C710C1EE9768300C70F91 /* PlayingCard.swift in Sources */,

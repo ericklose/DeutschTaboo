@@ -30,7 +30,6 @@ class BannedWord {
         }
     }
     
-    
     init(bannedWordDict: NSDictionary) {
         if bannedWordDict["bwWord"] != nil {
             self._bwWord = bannedWordDict["bwWord"] as? String

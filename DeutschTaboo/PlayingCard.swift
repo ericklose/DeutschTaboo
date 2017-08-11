@@ -25,7 +25,11 @@ class PlayingCard {
     }
     
     var targetDifficulty: Int {
-        return _targetDifficulty
+        if _targetDifficulty != nil {
+            return _targetDifficulty
+        } else {
+            return 1
+        }
     }
     
     var englishHint: String {
@@ -64,8 +68,8 @@ class PlayingCard {
         if let bannedWordsDict = aCardDict["bannedWords"] as? [NSDictionary] {
             for i in bannedWordsDict {
                 if let _ = i["bwWord"] as? String {
-                _bannedWords.append(BannedWord(bannedWordDict: i))
-            }
+                    _bannedWords.append(BannedWord(bannedWordDict: i))
+                }
             }
         }
     }

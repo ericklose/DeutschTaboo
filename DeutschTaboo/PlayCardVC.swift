@@ -29,7 +29,7 @@ class PlayCardVC: UIViewController {
     var schwierigkeit: Int!
     var activeCard: PlayingCard!
     var englishHints: Bool = false
-    var language: String = "Francais"
+    var language: String = "Deutsch"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,6 @@ class PlayCardVC: UIViewController {
         
         activeTeam = true
         timerDisplay.text = String(Int(roundTime))
-        
-            gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints)
         
     }
     
@@ -65,7 +63,9 @@ class PlayCardVC: UIViewController {
         scoreTeamB = 0
         activeTeam = true
         
-        gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints)
+        gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints, completed: {
+          print("PLAY BUILD, NO POINT IN THIS CLOSURE")
+        })
     }
     
     func runTimer() {

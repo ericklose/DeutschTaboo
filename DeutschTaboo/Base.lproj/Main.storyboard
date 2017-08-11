@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A315i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -245,7 +245,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5i-El-a1Y">
-                                <rect key="frame" x="167.5" y="76" width="40" height="40"/>
+                                <rect key="frame" x="168" y="76" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0YC-2T-aIY"/>
                                     <constraint firstAttribute="width" constant="40" id="SJ5-Zo-9ix"/>
@@ -290,11 +290,10 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="backToGame" id="Nr2-4O-1Kr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gesprach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWw-Nt-A2c">
-                                <rect key="frame" x="127.5" y="305" width="120" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gesprach" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWw-Nt-A2c">
+                                <rect key="frame" x="0.0" y="305" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="S0h-NL-m9D"/>
-                                    <constraint firstAttribute="width" constant="120" id="lXa-fe-guG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
@@ -306,18 +305,33 @@
                                     <constraint firstAttribute="height" constant="150" id="oCs-hi-AAQ"/>
                                 </constraints>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3S-2W-F9i">
+                                <rect key="frame" x="279" y="511" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="cY6-EL-f50"/>
+                                    <constraint firstAttribute="width" constant="80" id="pag-jq-WG6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Edit Cards"/>
+                                <connections>
+                                    <action selector="editCardsBtn:" destination="IEh-00-PWm" eventType="touchUpInside" id="QXe-H3-7h4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ahN-Sf-xRe" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="1gI-e9-lDo"/>
                             <constraint firstAttribute="trailing" secondItem="cQw-76-eH5" secondAttribute="trailing" id="4Zh-vg-GKM"/>
                             <constraint firstItem="w5i-El-a1Y" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="65x-xE-P91"/>
+                            <constraint firstItem="N3S-2W-F9i" firstAttribute="top" secondItem="cQw-76-eH5" secondAttribute="bottom" constant="8" id="6RE-Hw-A1O"/>
                             <constraint firstItem="vTu-t9-TXI" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="AWd-44-biF"/>
                             <constraint firstItem="cQw-76-eH5" firstAttribute="top" secondItem="FWw-Nt-A2c" secondAttribute="bottom" constant="8" id="DG2-wa-cd5"/>
                             <constraint firstItem="pgc-ad-zZm" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="DtF-bl-kSZ"/>
                             <constraint firstItem="FWw-Nt-A2c" firstAttribute="top" secondItem="ahN-Sf-xRe" secondAttribute="bottom" constant="30" id="Mn7-Zt-o5b"/>
+                            <constraint firstItem="N3S-2W-F9i" firstAttribute="trailing" secondItem="8cT-rg-otA" secondAttribute="trailingMargin" id="ScC-2p-Nbg"/>
                             <constraint firstItem="cQw-76-eH5" firstAttribute="leading" secondItem="8cT-rg-otA" secondAttribute="leading" id="XxI-Lt-Okf"/>
                             <constraint firstItem="vTu-t9-TXI" firstAttribute="top" secondItem="7fa-th-ytE" secondAttribute="bottom" constant="8" id="Zb7-kP-8U0"/>
+                            <constraint firstItem="FWw-Nt-A2c" firstAttribute="leading" secondItem="8cT-rg-otA" secondAttribute="leading" id="d1o-fa-4FT"/>
                             <constraint firstItem="ATM-7v-bOX" firstAttribute="top" secondItem="w5i-El-a1Y" secondAttribute="bottom" constant="8" id="edG-hi-S5y"/>
                             <constraint firstItem="ahN-Sf-xRe" firstAttribute="top" secondItem="pgc-ad-zZm" secondAttribute="bottom" constant="30" id="g4K-It-Mi8"/>
                             <constraint firstItem="Cix-xL-a9o" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="ika-qY-3dL"/>
@@ -326,6 +340,7 @@
                             <constraint firstItem="ATM-7v-bOX" firstAttribute="centerX" secondItem="8cT-rg-otA" secondAttribute="centerX" id="rbS-n9-x7A"/>
                             <constraint firstItem="mUl-yA-D3j" firstAttribute="top" secondItem="Cix-xL-a9o" secondAttribute="bottom" constant="20" id="sT1-eN-6xr"/>
                             <constraint firstItem="w5i-El-a1Y" firstAttribute="top" secondItem="vTu-t9-TXI" secondAttribute="bottom" constant="8" id="tv5-0b-v7h"/>
+                            <constraint firstAttribute="trailing" secondItem="FWw-Nt-A2c" secondAttribute="trailing" id="xaP-rs-4wX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -334,11 +349,156 @@
                         <outlet property="schwierigkeitLbl" destination="w5i-El-a1Y" id="PnQ-JD-1CX"/>
                         <outlet property="schwierigkeitSlider" destination="ATM-7v-bOX" id="Lbo-Zk-7Em"/>
                         <outlet property="zeitInput" destination="beq-7B-pqG" id="UUW-Ue-R0b"/>
+                        <segue destination="aKM-Em-puM" kind="show" identifier="editCards" id="SNc-ZP-JLP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKi-pn-aiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="224"/>
+            <point key="canvasLocation" x="1100" y="223.53823088455775"/>
+        </scene>
+        <!--Edit CardsVC-->
+        <scene sceneID="p39-Em-utm">
+            <objects>
+                <viewController id="aKM-Em-puM" customClass="EditCardsVC" customModule="DeutschTaboo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c0V-x4-LWV"/>
+                        <viewControllerLayoutGuide type="bottom" id="nLn-Ua-tu3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dps-dz-dLo" customClass="edit">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Target Word" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9eK-02-S2j">
+                                <rect key="frame" x="31" y="74" width="313" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="f8g-DE-0n3"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="English Translation" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8z-1P-cth">
+                                <rect key="frame" x="31" y="117" width="226" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="VyM-TL-iE8"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gPL-pl-KhQ">
+                                <rect key="frame" x="0.0" y="184" width="375" height="432"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editBannedCell" rowHeight="122" id="lyb-xs-wHc" customClass="EditBannedCell" customModule="DeutschTaboo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="122"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyb-xs-wHc" id="3cU-ns-qyf" customClass="EditBannedCell" customModule="DeutschTaboo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="English Translation" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOa-Ui-8Nm">
+                                                    <rect key="frame" x="23" y="59" width="242" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="coV-q9-quk"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aSE-am-eE4">
+                                                    <rect key="frame" x="273" y="59" width="79" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="1mh-lh-LW9"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Banned Word" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qAy-Fi-aio">
+                                                    <rect key="frame" x="23" y="16" width="329" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="Bjl-QZ-ZJ6"/>
+                                                    </constraints>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="centerX" secondItem="3cU-ns-qyf" secondAttribute="centerX" id="Kia-qH-2eq"/>
+                                                <constraint firstItem="FOa-Ui-8Nm" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="XpX-vk-xQi"/>
+                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="bXt-33-LVd"/>
+                                                <constraint firstItem="aSE-am-eE4" firstAttribute="leading" secondItem="FOa-Ui-8Nm" secondAttribute="trailing" constant="8" id="c96-GY-ZRA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qAy-Fi-aio" secondAttribute="trailing" constant="15" id="eTs-uv-CaU"/>
+                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="fEi-bu-rta"/>
+                                                <constraint firstItem="FOa-Ui-8Nm" firstAttribute="leading" secondItem="qAy-Fi-aio" secondAttribute="leading" id="ofp-xv-f7c"/>
+                                                <constraint firstItem="aSE-am-eE4" firstAttribute="trailing" secondItem="qAy-Fi-aio" secondAttribute="trailing" id="q5p-6W-YrS"/>
+                                                <constraint firstItem="aSE-am-eE4" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="tyd-wU-CPm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="editBannedDifficulty" destination="aSE-am-eE4" id="IH2-PJ-B9b"/>
+                                            <outlet property="editBannedEnglishTextField" destination="FOa-Ui-8Nm" id="xwM-BR-FUO"/>
+                                            <outlet property="editBannedWordTextField" destination="qAy-Fi-aio" id="whO-fN-Uz3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="av0-Gm-nkz">
+                                <rect key="frame" x="142" y="624" width="90" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="YBR-Hs-Uph"/>
+                                    <constraint firstAttribute="height" constant="35" id="hTe-ub-zlm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editCardSaveButton:" destination="aKM-Em-puM" eventType="touchUpInside" id="EXy-ly-k5n"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-6h-Sd5">
+                                <rect key="frame" x="265" y="117" width="79" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KyV-J2-qkB"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9aQ-6h-Sd5" firstAttribute="trailing" secondItem="9eK-02-S2j" secondAttribute="trailing" id="5PC-gp-a8H"/>
+                            <constraint firstItem="9eK-02-S2j" firstAttribute="top" secondItem="c0V-x4-LWV" secondAttribute="bottom" constant="54" id="7bs-A9-8pg"/>
+                            <constraint firstItem="av0-Gm-nkz" firstAttribute="centerX" secondItem="dps-dz-dLo" secondAttribute="centerX" id="9Dg-Rz-dQV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9eK-02-S2j" secondAttribute="trailing" constant="15" id="AHz-d2-poP"/>
+                            <constraint firstAttribute="trailing" secondItem="gPL-pl-KhQ" secondAttribute="trailing" id="Gsl-NY-7LU"/>
+                            <constraint firstItem="gPL-pl-KhQ" firstAttribute="leading" secondItem="dps-dz-dLo" secondAttribute="leading" id="HrE-t3-J41"/>
+                            <constraint firstItem="A8z-1P-cth" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="8" id="TLT-gJ-wg6"/>
+                            <constraint firstItem="av0-Gm-nkz" firstAttribute="top" secondItem="gPL-pl-KhQ" secondAttribute="bottom" constant="8" id="VIs-3h-cN9"/>
+                            <constraint firstItem="nLn-Ua-tu3" firstAttribute="top" secondItem="av0-Gm-nkz" secondAttribute="bottom" constant="8" id="Yjq-bX-xRz"/>
+                            <constraint firstItem="A8z-1P-cth" firstAttribute="leading" secondItem="9eK-02-S2j" secondAttribute="leading" id="cgg-XQ-bl6"/>
+                            <constraint firstItem="9aQ-6h-Sd5" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="8" id="hRk-eJ-zyz"/>
+                            <constraint firstItem="gPL-pl-KhQ" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="75" id="i8b-kK-p74"/>
+                            <constraint firstItem="9eK-02-S2j" firstAttribute="leading" secondItem="dps-dz-dLo" secondAttribute="leadingMargin" constant="15" id="l73-dB-qVL"/>
+                            <constraint firstItem="9eK-02-S2j" firstAttribute="centerX" secondItem="dps-dz-dLo" secondAttribute="centerX" id="qok-hJ-qOQ"/>
+                            <constraint firstItem="9aQ-6h-Sd5" firstAttribute="leading" secondItem="A8z-1P-cth" secondAttribute="trailing" constant="8" id="wWP-Hq-6cM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="editBannedWordsTable" destination="gPL-pl-KhQ" id="9Bq-lb-lJw"/>
+                        <outlet property="targetDifficulty" destination="9aQ-6h-Sd5" id="D9B-rL-yn1"/>
+                        <outlet property="targetEnglish" destination="A8z-1P-cth" id="9U4-Sh-wrH"/>
+                        <outlet property="targetWord" destination="9eK-02-S2j" id="nJp-CK-Xhp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="33D-Pv-69g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1959.2" y="221.73913043478262"/>
         </scene>
     </scenes>
 </document>

@@ -9,14 +9,15 @@
 import UIKit
 
 class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
     
-    @IBOutlet weak var schwierigkeitLbl: UILabel!    
+    
+    @IBOutlet weak var schwierigkeitLbl: UILabel!
     @IBOutlet weak var schwierigkeitSlider: UISlider!
     @IBOutlet weak var zeitInput: UITextField!
     @IBOutlet weak var englishHints: UISwitch!
     @IBOutlet weak var gesprachPicker: UIPickerView!
     
+    var deckPrep: BuildCardList!
     var schwierigkeit: Int!
     var roundTime: Int!
     var pickerDataSource = ["Deutsch", "Francais", "English"]
@@ -27,7 +28,7 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         self.gesprachPicker.dataSource = self
         self.gesprachPicker.delegate = self
-
+        
         gesprachPicker.selectRow(pickerDataSource.index(of: gesprach)!, inComponent: 0, animated: true)
         englishHints.isOn = englishHintsOn
         zeitInput.text = String(roundTime)
@@ -38,7 +39,7 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidAppear(_ animated: Bool) {
         self.gesprachPicker.reloadAllComponents()
     }
-
+    
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         let selectedValue = Int(sender.value)
         schwierigkeitLbl.text = String(stringInterpolationSegment: selectedValue)
@@ -59,7 +60,7 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         gesprach = pickerDataSource[row]
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToGame" {
             if let playCardVC = segue.destination as? PlayCardVC {
@@ -69,6 +70,15 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 playCardVC.language = gesprach
                 playCardVC.englishHints = englishHintsOn
             }
+        } else if segue.identifier == "editCards" {
+            if let editCardsVC = segue.destination as? EditCardsVC {
+                print("segue actions card count: ", self.deckPrep.gameDeck.count)
+                editCardsVC.deckEditLanguage = self.gesprach
+                //self.deckPrep = BuildCardList.init(language: self.gesprach, difficulty: 5, englishHints: true)
+                editCardsVC.deckToEdit = self.deckPrep
+                editCardsVC.cardToEdit = self.deckPrep.drawRandomCard()
+                //}
+            }
         }
     }
     
@@ -76,8 +86,14 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         englishHintsOn = englishHints.isOn
     }
     
+    @IBAction func editCardsBtn(_ sender: Any) {
+        self.deckPrep = BuildCardList.init(language: gesprach, difficulty: 5, englishHints: true, completed: {
+            self.performSegue(withIdentifier: "editCards", sender: self)
+        })
+    }
+    
     @IBAction func settingsGenauBtn(_ sender: UIButton) {
         self.performSegue(withIdentifier: "backToGame", sender: self)
     }
-
+    
 }

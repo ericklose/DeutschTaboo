@@ -37,33 +37,35 @@ class BuildCardList {
         _gameDeck.removeAll()
     }
     
-    init(language: String, difficulty: Int, englishHints: Bool) {
+    init(language: String, difficulty: Int, englishHints: Bool, completed: @escaping DownloadComplete) {
+        print("TEST A")
         downloadData(language: language, completed: {
-            self.parseJSON(difficulty: difficulty, englishHints: englishHints)
+            print("TEST B")
+            self.parseJSON(difficulty: difficulty, englishHints: englishHints, completed: {
+                print("INSIDE PARSE, BUT WHY DOES THIS EXIST")
+                completed()
+                //DownloadComplete()
+                
+            })
         })
     }
     
     func downloadData(language: String, completed: @escaping DownloadComplete) {
         let url = NSURL(string: "http://hollyanderic.com/TabooServer/cards2.php?language=\(language)")
-        
         let request = NSMutableURLRequest(url: url! as URL)
-        
         let task = URLSession.shared.dataTask(with: request as URLRequest) { data,response,error in
             guard error == nil && data != nil else
             {
                 print("Error:",error ?? "Some Error Happened")
                 return
             }
-            
             let httpStatus = response as? HTTPURLResponse
-            
             if httpStatus!.statusCode == 200
             {
                 if data?.count != 0
                 {
                     if let responseString = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSArray  {
                         self._jsonResults = responseString
-                        
                     }
                 }
             }
@@ -72,8 +74,8 @@ class BuildCardList {
         task.resume()
     }
     
-    func parseJSON(difficulty: Int, englishHints: Bool) {
-        if let jsonItem = jsonResults {
+    func parseJSON(difficulty: Int, englishHints: Bool, completed: @escaping DownloadComplete) {
+        if jsonResults != nil {
             for jsonItem in jsonResults! {
                 if let aCardDict = jsonItem as? NSDictionary {
                     if let twDictDifficulty = aCardDict["twDifficulty"] as? String {
@@ -85,5 +87,6 @@ class BuildCardList {
                 }
             }
         }
+        completed()
     }
 }
