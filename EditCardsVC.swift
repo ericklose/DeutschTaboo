@@ -12,7 +12,7 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     var deckToEdit: BuildCardList!
     var cardToEdit: PlayingCard!
-    //    var bannedWords = [BannedWord]()
+    var bannedWords = [BannedWord]()
     var deckEditLanguage: String!
     
     @IBOutlet weak var targetWord: UITextField!
@@ -43,7 +43,7 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2 //+ cardToEdit.bannedWords.count
+        return 3 + cardToEdit.bannedWords.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,15 +51,19 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //       if let cell = editBannedWordsTable.dequeueReusableCell(withIdentifier: "editBannedCell") as? EditBannedCell {
-        //n            print("banned : ", cardToEdit.bannedWords[0].bwWord)
-        //            let bannedWord = cardToEdit.bannedWords[(indexPath as NSIndexPath).row]
-        //            cell.configureCell(bannedWord: bannedWord)
-        //            return cell
-        //        } else {
+        print("CARD IS: ", cardToEdit.targetWord)
+        print ("BW COUNT: ", cardToEdit.bannedWords.count)
+        if (indexPath as NSIndexPath).row < cardToEdit.bannedWords.count {
+            let bannedWord = cardToEdit.bannedWords[(indexPath as NSIndexPath).row]
+            if let cell = editBannedWordsTable.dequeueReusableCell(withIdentifier: "editBannedCell") as? EditBannedCell {
+                cell.configureCell(bannedWord: bannedWord)
+                return cell
+            } else {
+                return EditBannedCell()
+            }
+        }
         return EditBannedCell()
     }
-    //    }
     
     
     @IBAction func editCardSaveButton(_ sender: UIButton) {
@@ -67,7 +71,7 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cardToEdit = deckToEdit.drawRandomCard()
             targetWord.text = cardToEdit.targetWord
             targetEnglish.text = cardToEdit.englishHint
-            //            targetDifficulty.text = "\(cardToEdit.targetDifficulty)"
+            targetDifficulty.text = "\(cardToEdit.targetDifficulty)"
             editBannedWordsTable.reloadData()
         }
     }

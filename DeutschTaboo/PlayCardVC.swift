@@ -64,7 +64,7 @@ class PlayCardVC: UIViewController {
         activeTeam = true
         
         gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints, completed: {
-          print("PLAY BUILD, NO POINT IN THIS CLOSURE")
+
         })
     }
     

@@ -38,14 +38,9 @@ class BuildCardList {
     }
     
     init(language: String, difficulty: Int, englishHints: Bool, completed: @escaping DownloadComplete) {
-        print("TEST A")
         downloadData(language: language, completed: {
-            print("TEST B")
             self.parseJSON(difficulty: difficulty, englishHints: englishHints, completed: {
-                print("INSIDE PARSE, BUT WHY DOES THIS EXIST")
                 completed()
-                //DownloadComplete()
-                
             })
         })
     }

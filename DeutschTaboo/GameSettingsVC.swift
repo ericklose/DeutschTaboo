@@ -74,10 +74,8 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             if let editCardsVC = segue.destination as? EditCardsVC {
                 print("segue actions card count: ", self.deckPrep.gameDeck.count)
                 editCardsVC.deckEditLanguage = self.gesprach
-                //self.deckPrep = BuildCardList.init(language: self.gesprach, difficulty: 5, englishHints: true)
                 editCardsVC.deckToEdit = self.deckPrep
                 editCardsVC.cardToEdit = self.deckPrep.drawRandomCard()
-                //}
             }
         }
     }

@@ -26,9 +26,11 @@ class EditBannedCell: UITableViewCell {
     }
     
     func configureCell(bannedWord: BannedWord) {
-        self.editBannedWordTextField.text = "Loaded"
-        self.editBannedEnglishTextField.placeholder = "write here"
-        editBannedDifficulty.text = "3"
+        print("THIS IS INSIDE BANNED CELL")
+        self.editBannedWordTextField.text = bannedWord.bwWord
+        self.editBannedEnglishTextField.text = bannedWord.bwEnglishHint
+        self.editBannedDifficulty.text = "\(bannedWord.bwDifficulty)"
+        //"\(0)"
         
     }
 

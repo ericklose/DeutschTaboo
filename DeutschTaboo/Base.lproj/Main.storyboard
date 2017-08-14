@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A315i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A330h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -428,13 +428,16 @@
                                             <constraints>
                                                 <constraint firstItem="qAy-Fi-aio" firstAttribute="centerX" secondItem="3cU-ns-qyf" secondAttribute="centerX" id="Kia-qH-2eq"/>
                                                 <constraint firstItem="FOa-Ui-8Nm" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="XpX-vk-xQi"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qAy-Fi-aio" secondAttribute="trailing" constant="15" id="ar1-b7-z0u"/>
                                                 <constraint firstItem="qAy-Fi-aio" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="bXt-33-LVd"/>
                                                 <constraint firstItem="aSE-am-eE4" firstAttribute="leading" secondItem="FOa-Ui-8Nm" secondAttribute="trailing" constant="8" id="c96-GY-ZRA"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="qAy-Fi-aio" secondAttribute="trailing" constant="15" id="eTs-uv-CaU"/>
                                                 <constraint firstItem="qAy-Fi-aio" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="fEi-bu-rta"/>
                                                 <constraint firstItem="FOa-Ui-8Nm" firstAttribute="leading" secondItem="qAy-Fi-aio" secondAttribute="leading" id="ofp-xv-f7c"/>
+                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="p59-PJ-rkq"/>
                                                 <constraint firstItem="aSE-am-eE4" firstAttribute="trailing" secondItem="qAy-Fi-aio" secondAttribute="trailing" id="q5p-6W-YrS"/>
                                                 <constraint firstItem="aSE-am-eE4" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="tyd-wU-CPm"/>
+                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="yxf-Vt-oI8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
