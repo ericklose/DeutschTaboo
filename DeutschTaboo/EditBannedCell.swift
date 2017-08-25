@@ -30,8 +30,10 @@ class EditBannedCell: UITableViewCell {
         self.editBannedWordTextField.text = bannedWord.bwWord
         self.editBannedEnglishTextField.text = bannedWord.bwEnglishHint
         self.editBannedDifficulty.text = "\(bannedWord.bwDifficulty)"
-        //"\(0)"
-        
+    }
+    
+    func prepEmptyCell() {
+        print("THIS IS AN EMPTY CELL")
     }
 
 }

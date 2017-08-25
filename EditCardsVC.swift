@@ -25,9 +25,6 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         super.viewDidLoad()
         editBannedWordsTable.delegate = self
         editBannedWordsTable.dataSource = self
-        editBannedWordsTable.estimatedRowHeight = 100
-        
-        editBannedWordsTable.reloadData()
         
         cardToEdit = deckToEdit.drawRandomCard()
         
@@ -36,6 +33,8 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             targetEnglish.text = cardToEdit.englishHint
             targetDifficulty.text = "\(cardToEdit.targetDifficulty)"
         }
+        
+        editBannedWordsTable.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,20 +45,21 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return 3 + cardToEdit.bannedWords.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return editBannedWordsTable.estimatedRowHeight
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("CARD IS: ", cardToEdit.targetWord)
-        print ("BW COUNT: ", cardToEdit.bannedWords.count)
-        if (indexPath as NSIndexPath).row < cardToEdit.bannedWords.count {
-            let bannedWord = cardToEdit.bannedWords[(indexPath as NSIndexPath).row]
-            if let cell = editBannedWordsTable.dequeueReusableCell(withIdentifier: "editBannedCell") as? EditBannedCell {
-                cell.configureCell(bannedWord: bannedWord)
-                return cell
+        for _ in indexPath {
+            if (indexPath as NSIndexPath).row < cardToEdit.bannedWords.count {
+                let bannedWord = cardToEdit.bannedWords[(indexPath as NSIndexPath).row]
+                if let cell = editBannedWordsTable.dequeueReusableCell(withIdentifier: "editBannedCell") as? EditBannedCell {
+                    cell.configureCell(bannedWord: bannedWord)
+                    return cell
+                } else {
+                    return EditBannedCell()
+                }
             } else {
-                return EditBannedCell()
+                if let cell = editBannedWordsTable.dequeueReusableCell(withIdentifier: "editBannedCell") as? EditBannedCell {
+                    cell.prepEmptyCell()
+                    return cell
+                }
             }
         }
         return EditBannedCell()
@@ -75,5 +75,4 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             editBannedWordsTable.reloadData()
         }
     }
-    
 }

@@ -30,6 +30,8 @@ class BuildCardList {
         print("Deck Count: ", _gameDeck.count)
         let randomIndex = arc4random_uniform(UInt32(_gameDeck.count))
         _randomCard = _gameDeck.remove(at: Int(randomIndex))
+        
+        print("CARD ID ", _randomCard.cardId)
         return _randomCard
     }
     

@@ -15,6 +15,7 @@ class PlayingCard {
     private var _targetDifficulty: Int!
     private var _language: String!
     private var _englishHint: String!
+    private var _cardId: Int!
     
     var targetWord: String {
         return _targetWord
@@ -24,9 +25,17 @@ class PlayingCard {
         return _language
     }
     
+    var cardId: Int {
+        if _cardId != nil {
+            return _cardId
+        } else {
+            return 0
+        }
+    }
+    
     var targetDifficulty: Int {
         if _targetDifficulty != nil {
-            return _targetDifficulty
+            return Int(_targetDifficulty)
         } else {
             return 1
         }
@@ -49,12 +58,16 @@ class PlayingCard {
     }
     
     init(aCardDict: NSDictionary) {
+        if let cardDictId = aCardDict["twID"] as? String {
+            self._cardId = Int(cardDictId)
+        }
+        
         if aCardDict["twWord"] != nil {
             _targetWord = aCardDict["twWord"] as? String
         }
         
-        if aCardDict["twWDifficulty"] != nil {
-            _targetDifficulty = aCardDict["twDifficulty"] as? Int
+        if let cardDictDiff = aCardDict["twDifficulty"] as? String {
+            self._targetDifficulty = Int(cardDictDiff)
         }
         
         if aCardDict["twLanguage"] != nil {

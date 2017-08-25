@@ -10,9 +10,14 @@ import Foundation
 
 class BannedWord {
     
+    private var _bwId: Int!
     private var _bwWord: String!
     private var _bwDifficulty: Int!
     private var _bwEnglishHint: String!
+    
+    var bwId: Int {
+        return _bwId
+    }
     
     var bwWord: String {
         return _bwWord
@@ -31,6 +36,10 @@ class BannedWord {
     }
     
     init(bannedWordDict: NSDictionary) {
+        if let bannedDictId = bannedWordDict["bwID"] as? String {
+            self._bwId = Int(bannedDictId)
+        }
+        
         if bannedWordDict["bwWord"] != nil {
             self._bwWord = bannedWordDict["bwWord"] as? String
         }
@@ -39,7 +48,6 @@ class BannedWord {
             self._bwDifficulty = Int(bwDictDifficulty)
         }
 
-        
         if let bwDictEnglish = bannedWordDict["bwEnglish"] as? String {
             self._bwEnglishHint = bwDictEnglish
         }

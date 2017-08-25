@@ -386,58 +386,61 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="122" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gPL-pl-KhQ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gPL-pl-KhQ">
                                 <rect key="frame" x="0.0" y="184" width="375" height="432"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editBannedCell" rowHeight="122" id="lyb-xs-wHc" customClass="EditBannedCell" customModule="DeutschTaboo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="122"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editBannedCell" rowHeight="102" id="lyb-xs-wHc" customClass="EditBannedCell" customModule="DeutschTaboo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyb-xs-wHc" id="3cU-ns-qyf" customClass="EditBannedCell" customModule="DeutschTaboo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="101.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="English Translation" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOa-Ui-8Nm">
-                                                    <rect key="frame" x="23" y="59" width="242" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="coV-q9-quk"/>
-                                                    </constraints>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aSE-am-eE4">
-                                                    <rect key="frame" x="273" y="59" width="79" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="1mh-lh-LW9"/>
-                                                    </constraints>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Banned Word" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qAy-Fi-aio">
-                                                    <rect key="frame" x="23" y="16" width="329" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="Bjl-QZ-ZJ6"/>
-                                                    </constraints>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RcV-Sd-gbV">
+                                                    <rect key="frame" x="23" y="16.5" width="329" height="73"/>
+                                                    <subviews>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Banned Word" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qAy-Fi-aio">
+                                                            <rect key="frame" x="0.0" y="0.0" width="329" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="Bjl-QZ-ZJ6"/>
+                                                            </constraints>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qn1-hm-NPG">
+                                                            <rect key="frame" x="0.0" y="43" width="329" height="30"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="English Translation" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FOa-Ui-8Nm">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="235" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="coV-q9-quk"/>
+                                                                    </constraints>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                </textField>
+                                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aSE-am-eE4">
+                                                                    <rect key="frame" x="250" y="0.0" width="79" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="kKi-rU-lQW"/>
+                                                                    </constraints>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits"/>
+                                                                </textField>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="centerX" secondItem="3cU-ns-qyf" secondAttribute="centerX" id="Kia-qH-2eq"/>
-                                                <constraint firstItem="FOa-Ui-8Nm" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="XpX-vk-xQi"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qAy-Fi-aio" secondAttribute="trailing" constant="15" id="ar1-b7-z0u"/>
-                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="bXt-33-LVd"/>
-                                                <constraint firstItem="aSE-am-eE4" firstAttribute="leading" secondItem="FOa-Ui-8Nm" secondAttribute="trailing" constant="8" id="c96-GY-ZRA"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qAy-Fi-aio" secondAttribute="trailing" constant="15" id="eTs-uv-CaU"/>
-                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="fEi-bu-rta"/>
-                                                <constraint firstItem="FOa-Ui-8Nm" firstAttribute="leading" secondItem="qAy-Fi-aio" secondAttribute="leading" id="ofp-xv-f7c"/>
-                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="p59-PJ-rkq"/>
-                                                <constraint firstItem="aSE-am-eE4" firstAttribute="trailing" secondItem="qAy-Fi-aio" secondAttribute="trailing" id="q5p-6W-YrS"/>
-                                                <constraint firstItem="aSE-am-eE4" firstAttribute="top" secondItem="qAy-Fi-aio" secondAttribute="bottom" constant="8" id="tyd-wU-CPm"/>
-                                                <constraint firstItem="qAy-Fi-aio" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="yxf-Vt-oI8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="RcV-Sd-gbV" secondAttribute="trailing" constant="15" id="1ow-zE-Ww7"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RcV-Sd-gbV" secondAttribute="bottom" constant="8" id="5Wo-V8-ope"/>
+                                                <constraint firstItem="RcV-Sd-gbV" firstAttribute="leading" secondItem="3cU-ns-qyf" secondAttribute="leadingMargin" constant="15" id="9CP-dE-37I"/>
+                                                <constraint firstItem="RcV-Sd-gbV" firstAttribute="centerX" secondItem="3cU-ns-qyf" secondAttribute="centerX" id="EUN-CI-8FE"/>
+                                                <constraint firstItem="RcV-Sd-gbV" firstAttribute="top" secondItem="3cU-ns-qyf" secondAttribute="topMargin" constant="8" id="JgD-Bw-BOU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
