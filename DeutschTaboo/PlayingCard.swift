@@ -16,14 +16,8 @@ class PlayingCard {
     private var _language: String!
     private var _englishHint: String!
     private var _cardId: Int!
-    
-    var targetWord: String {
-        return _targetWord
-    }
-    
-    var language: String {
-        return _language
-    }
+    private var _cardJson = [String:Any]()
+    private var _bannedJson = [Any]()
     
     var cardId: Int {
         if _cardId != nil {
@@ -31,6 +25,14 @@ class PlayingCard {
         } else {
             return 0
         }
+    }
+    
+    var targetWord: String {
+        return _targetWord
+    }
+    
+    var language: String {
+        return _language
     }
     
     var targetDifficulty: Int {
@@ -85,6 +87,36 @@ class PlayingCard {
                 }
             }
         }
+    }
+    
+    func addBannedWord(newBannedDict: [String: Any]) {
+        if let newTempDict = newBannedDict as? NSDictionary {
+            _bannedWords.append(BannedWord(bannedWordDict: newTempDict))
+        }
+    }
+    
+    func addBannedWordOLD(newBannedWord: String) {
+        if let newTempDict = ["bwWord": newBannedWord] as? NSDictionary {
+            _bannedWords.append(BannedWord(bannedWordDict: newTempDict))
+        }
+    }
+    
+    func jsonifyCard() -> [String: Any] {
+        _cardJson = ["twID": _cardId, "twWord": _targetWord, "twDifficulty": _targetDifficulty, "twLanguage": _language, "twEnglish": _englishHint]
+        
+        if _bannedWords.isEmpty {
+            print("EMPTY BAN")
+        } else {
+            _bannedJson = []
+            for ban in _bannedWords {
+                let ban2 = ban.jsonifyBannedWord() as [String: Any]
+                _bannedJson.append(ban2)
+            }
+            _cardJson["bannedWords"] = _bannedJson
+        }
+        
+        print("JSON OUTPUT: ", _cardJson)
+        return _cardJson
     }
     
 }
