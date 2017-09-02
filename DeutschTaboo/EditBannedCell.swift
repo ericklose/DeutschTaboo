@@ -50,7 +50,6 @@ class EditBannedCell: UITableViewCell {
                 bannedWord.editBannedWord(bannedWordEdit: updatedBannedWord)
             } else if isNewBannedWord == true && editBannedWordTextField.text != "" {
                 newBannedWord["bwWord"] = updatedBannedWord
-                print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
                 cardToEdit.addBannedWord(newBannedDict: newBannedWord)
                 self.bannedWord = cardToEdit.bannedWords.last
                 newBannedWord = [:]

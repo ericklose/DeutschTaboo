@@ -20,29 +20,23 @@ class PlayCardVC: UIViewController {
     @IBOutlet weak var timerDisplay: UILabel!
     
     var gameDeck: BuildCardList!
+    var gameSettings: GameSettings!
     var scoreTeamA: Int = 0
     var scoreTeamB: Int = 0
     var activeTeam: Bool!
     var gameTimer: Timer!
-    var roundTime: Double!
     var startTime = Date.timeIntervalSinceReferenceDate
-    var schwierigkeit: Int!
     var activeCard: PlayingCard!
-    var englishHints: Bool = false
-    var language: String = "Deutsch"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if schwierigkeit == nil {
-            schwierigkeit = 5
-        }
-        if roundTime == nil {
-            roundTime = 90
+        if gameSettings == nil {
+            gameSettings = GameSettings.init(initLanguage: "Deutsch", initGameTime: 90, initGameDifficulty: 5, initEnglishHints: true)
         }
         
         activeTeam = true
-        timerDisplay.text = String(Int(roundTime))
+        timerDisplay.text = String(Int(gameSettings.gameTime))
         
     }
     
@@ -63,13 +57,13 @@ class PlayCardVC: UIViewController {
         scoreTeamB = 0
         activeTeam = true
         
-        gameDeck = BuildCardList.init(language: language, difficulty: schwierigkeit, englishHints: englishHints, completed: {
-
+        gameDeck = BuildCardList.init(language: gameSettings.language, difficulty: gameSettings.gameDifficulty, englishHints: gameSettings.englishHints, completed: {
+            
         })
     }
     
     func runTimer() {
-        timerDisplay.text = String(Int(roundTime))
+        timerDisplay.text = String(Int(gameSettings.gameTime))
         startTime = Date.timeIntervalSinceReferenceDate
         gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCountDown), userInfo: nil, repeats: true)
     }
@@ -77,13 +71,13 @@ class PlayCardVC: UIViewController {
     func updateCountDown() {
         let currentTime = Date.timeIntervalSinceReferenceDate
         let timeElapsed = (currentTime - startTime)
-        if timeElapsed < roundTime {
-            timerDisplay.text = String(Int((roundTime - timeElapsed).rounded()))
+        if Int(timeElapsed) < gameSettings.gameTime {
+            timerDisplay.text = String(Int(gameSettings.gameTime - Int(timeElapsed)))
         } else {
             timerDisplay.text = "\(0)"
         }
         
-        if timeElapsed >= roundTime {
+        if Int(timeElapsed) >= gameSettings.gameTime {
             endRound(reason: "timeOut")
         }
     }
@@ -99,7 +93,7 @@ class PlayCardVC: UIViewController {
         verbotenList.text = ""
         
         for bannedWord in activeCard.bannedWords {
-            if (bannedWord.bwDifficulty <= schwierigkeit) {
+            if (bannedWord.bwDifficulty <= gameSettings.gameDifficulty) {
                 verbotenList.text = verbotenList.text! + "\n \(bannedWord.bwWord)"
             }
         }
@@ -175,9 +169,7 @@ class PlayCardVC: UIViewController {
     func popStartAlert() {
         let alertController = UIAlertController(title: "Bereits Zu Beginn?", message: "", preferredStyle: .alert)
         let los = UIAlertAction(title: "Los!", style: .default, handler: { (action) -> Void in
-            
             self.startRound()
-            
         })
         let spielEinzelheiten = UIAlertAction(title: "Spiel Einzelheiten", style: .default, handler: { (action) -> Void in
             self.performSegue(withIdentifier: "spielSettings", sender: nil)
@@ -190,10 +182,7 @@ class PlayCardVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "spielSettings" {
             if let gameSettingsVC = segue.destination as? GameSettingsVC {
-                gameSettingsVC.roundTime = Int(self.roundTime)
-                gameSettingsVC.schwierigkeit = self.schwierigkeit
-                gameSettingsVC.englishHintsOn = self.englishHints
-                gameSettingsVC.gesprach = self.language
+                gameSettingsVC.gameSettings = gameSettings
             }
         }
     }

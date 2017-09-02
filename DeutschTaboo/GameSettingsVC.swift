@@ -18,22 +18,22 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var gesprachPicker: UIPickerView!
     
     var deckPrep: BuildCardList!
-    var schwierigkeit: Int!
-    var roundTime: Int!
+    var gameSettings: GameSettings!
     var pickerDataSource = ["Deutsch", "Francais", "English"]
-    var gesprach: String!
-    var englishHintsOn: Bool!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gesprachPicker.dataSource = self
         self.gesprachPicker.delegate = self
         
-        gesprachPicker.selectRow(pickerDataSource.index(of: gesprach)!, inComponent: 0, animated: true)
-        englishHints.isOn = englishHintsOn
-        zeitInput.text = String(roundTime)
-        schwierigkeitSlider.value = Float(schwierigkeit)
-        schwierigkeitLbl.text = String(schwierigkeit)
+        gesprachPicker.selectRow(pickerDataSource.index(of: gameSettings.language)!, inComponent: 0, animated: true)
+        englishHints.isOn = gameSettings.englishHints
+        zeitInput.text = String(gameSettings.gameTime)
+        schwierigkeitSlider.value = Float(gameSettings.gameDifficulty)
+        schwierigkeitLbl.text = String(gameSettings.gameDifficulty)
+        
+        print("SETTINGS: ", gameSettings.gameDifficulty, gameSettings.gameTime, gameSettings.englishHints)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +43,7 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         let selectedValue = Int(sender.value)
         schwierigkeitLbl.text = String(stringInterpolationSegment: selectedValue)
+        gameSettings.changeDifficulty(newDifficulty: selectedValue)
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -58,34 +59,41 @@ class GameSettingsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        gesprach = pickerDataSource[row]
+        let pickedLanguage = pickerDataSource[row]
+        gameSettings.changeLanguage(newLanguage: pickedLanguage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        updateTheTime()
         if segue.identifier == "backToGame" {
             if let playCardVC = segue.destination as? PlayCardVC {
-                let newTime = self.zeitInput.text
-                playCardVC.roundTime = Double(newTime!)
-                playCardVC.schwierigkeit = Int(self.schwierigkeitSlider.value)
-                playCardVC.language = gesprach
-                playCardVC.englishHints = englishHintsOn
+                playCardVC.gameSettings = gameSettings
             }
         } else if segue.identifier == "editCards" {
             if let editCardsVC = segue.destination as? EditCardsVC {
                 print("segue actions card count: ", self.deckPrep.gameDeck.count)
-                editCardsVC.deckEditLanguage = self.gesprach
+                editCardsVC.gameSettings = gameSettings
                 editCardsVC.deckToEdit = self.deckPrep
                 editCardsVC.cardToEdit = self.deckPrep.drawRandomCard()
             }
         }
     }
+
+    func updateTheTime() {
+        if let typedTime = self.zeitInput.text {
+            if let newTime = Int(typedTime) {
+                self.gameSettings.changeGameTime(newGameTime: newTime)
+            }
+        }
+    }
     
     @IBAction func englishHintsToggle(_ sender: UISwitch) {
-        englishHintsOn = englishHints.isOn
+        let englishToggle = englishHints.isOn
+        gameSettings.changeEnglish(englishHintStatus: englishToggle)
     }
     
     @IBAction func editCardsBtn(_ sender: Any) {
-        self.deckPrep = BuildCardList.init(language: gesprach, difficulty: 5, englishHints: true, completed: {
+        self.deckPrep = BuildCardList.init(language: gameSettings.language, difficulty: 5, englishHints: true, completed: {
             self.performSegue(withIdentifier: "editCards", sender: self)
         })
     }

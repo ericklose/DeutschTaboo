@@ -409,7 +409,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                             <connections>
-                                                                <action selector="editBannedWord:" destination="lyb-xs-wHc" eventType="editingDidEnd" id="5jn-FZ-uWT"/>
+                                                                <action selector="editBannedWord:" destination="lyb-xs-wHc" eventType="editingChanged" id="qn1-hg-aem"/>
                                                             </connections>
                                                         </textField>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qn1-hm-NPG">
@@ -424,7 +424,7 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                     <connections>
-                                                                        <action selector="editBannedEnglishTranslation:" destination="lyb-xs-wHc" eventType="editingDidEnd" id="W3c-Li-5P4"/>
+                                                                        <action selector="editBannedEnglishTranslation:" destination="lyb-xs-wHc" eventType="editingChanged" id="pPk-zF-zM8"/>
                                                                     </connections>
                                                                 </textField>
                                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aSE-am-eE4">
@@ -436,7 +436,7 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                     <connections>
-                                                                        <action selector="editBannedDifficulty:" destination="lyb-xs-wHc" eventType="editingDidEnd" id="F0k-99-2LB"/>
+                                                                        <action selector="editBannedDifficulty:" destination="lyb-xs-wHc" eventType="editingChanged" id="H9w-gX-9QS"/>
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
@@ -475,6 +475,23 @@
                                     <action selector="editCardSaveButton:" destination="aKM-Em-puM" eventType="touchUpInside" id="EXy-ly-k5n"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vVP-eQ-3Nv">
+                                <rect key="frame" x="31" y="624" width="90" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="8eV-Vv-H4z"/>
+                                    <constraint firstAttribute="width" constant="90" id="HyX-bQ-QFR"/>
+                                    <constraint firstAttribute="height" constant="35" id="iiQ-iM-hR3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editCardSaveButton:" destination="aKM-Em-puM" eventType="touchUpInside" id="vix-Hc-w1r"/>
+                                    <segue destination="IEh-00-PWm" kind="show" identifier="backToSettings" id="gIC-dz-LTn"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Difficulty" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-6h-Sd5">
                                 <rect key="frame" x="265" y="117" width="79" height="30"/>
                                 <constraints>
@@ -484,22 +501,44 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3P-gb-2hh">
+                                <rect key="frame" x="254" y="624" width="90" height="35"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="4kC-KV-LcE"/>
+                                    <constraint firstAttribute="width" constant="90" id="jce-jq-xSz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="New">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewCard:" destination="aKM-Em-puM" eventType="touchUpInside" id="vcM-R5-Cqq"/>
+                                    <action selector="editCardSaveButton:" destination="aKM-Em-puM" eventType="touchUpInside" id="fGO-DK-aT9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="J3P-gb-2hh" firstAttribute="top" secondItem="gPL-pl-KhQ" secondAttribute="bottom" constant="8" id="4RI-as-mP6"/>
                             <constraint firstItem="9aQ-6h-Sd5" firstAttribute="trailing" secondItem="9eK-02-S2j" secondAttribute="trailing" id="5PC-gp-a8H"/>
                             <constraint firstItem="9eK-02-S2j" firstAttribute="top" secondItem="c0V-x4-LWV" secondAttribute="bottom" constant="54" id="7bs-A9-8pg"/>
                             <constraint firstItem="av0-Gm-nkz" firstAttribute="centerX" secondItem="dps-dz-dLo" secondAttribute="centerX" id="9Dg-Rz-dQV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9eK-02-S2j" secondAttribute="trailing" constant="15" id="AHz-d2-poP"/>
+                            <constraint firstItem="vVP-eQ-3Nv" firstAttribute="leading" secondItem="dps-dz-dLo" secondAttribute="leadingMargin" constant="15" id="EG8-od-tak"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J3P-gb-2hh" secondAttribute="trailing" constant="15" id="ESk-sb-pt0"/>
                             <constraint firstAttribute="trailing" secondItem="gPL-pl-KhQ" secondAttribute="trailing" id="Gsl-NY-7LU"/>
                             <constraint firstItem="gPL-pl-KhQ" firstAttribute="leading" secondItem="dps-dz-dLo" secondAttribute="leading" id="HrE-t3-J41"/>
+                            <constraint firstItem="nLn-Ua-tu3" firstAttribute="top" secondItem="J3P-gb-2hh" secondAttribute="bottom" constant="8" id="LQv-zl-bH2"/>
                             <constraint firstItem="A8z-1P-cth" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="8" id="TLT-gJ-wg6"/>
                             <constraint firstItem="av0-Gm-nkz" firstAttribute="top" secondItem="gPL-pl-KhQ" secondAttribute="bottom" constant="8" id="VIs-3h-cN9"/>
                             <constraint firstItem="nLn-Ua-tu3" firstAttribute="top" secondItem="av0-Gm-nkz" secondAttribute="bottom" constant="8" id="Yjq-bX-xRz"/>
                             <constraint firstItem="A8z-1P-cth" firstAttribute="leading" secondItem="9eK-02-S2j" secondAttribute="leading" id="cgg-XQ-bl6"/>
+                            <constraint firstItem="nLn-Ua-tu3" firstAttribute="top" secondItem="vVP-eQ-3Nv" secondAttribute="bottom" constant="8" id="fNI-Uq-UM2"/>
                             <constraint firstItem="9aQ-6h-Sd5" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="8" id="hRk-eJ-zyz"/>
                             <constraint firstItem="gPL-pl-KhQ" firstAttribute="top" secondItem="9eK-02-S2j" secondAttribute="bottom" constant="75" id="i8b-kK-p74"/>
                             <constraint firstItem="9eK-02-S2j" firstAttribute="leading" secondItem="dps-dz-dLo" secondAttribute="leadingMargin" constant="15" id="l73-dB-qVL"/>
+                            <constraint firstItem="vVP-eQ-3Nv" firstAttribute="top" secondItem="gPL-pl-KhQ" secondAttribute="bottom" constant="8" id="lPu-Et-jQ9"/>
                             <constraint firstItem="9eK-02-S2j" firstAttribute="centerX" secondItem="dps-dz-dLo" secondAttribute="centerX" id="qok-hJ-qOQ"/>
                             <constraint firstItem="9aQ-6h-Sd5" firstAttribute="leading" secondItem="A8z-1P-cth" secondAttribute="trailing" constant="8" id="wWP-Hq-6cM"/>
                         </constraints>
@@ -516,4 +555,7 @@
             <point key="canvasLocation" x="1959.2" y="221.73913043478262"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="gIC-dz-LTn"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -11,6 +11,7 @@ import UIKit
 class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var deckToEdit: BuildCardList!
+    var gameSettings: GameSettings!
     var cardToEdit: PlayingCard!
     var bannedWords = [BannedWord]()
     var deckEditLanguage: String!
@@ -31,14 +32,16 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         editBannedWordsTable.dataSource = self
         
         newCardToEdit()
-        
     }
+
+    //project summary - a timing issue is crippling many effects (need GCD?), needs to write to webserver, needs new cards 
     
-    
-    //PROJECT 0: HAVE SAVE BUTTON SAVE EVEN IF USER HAS NOT UNSELECTED A FIELD
-    //PROJECT 1: POST TO SERVER
-    //PROJECT 2: MAKE TOP AREA DISPLAY POPULATE CORRECTLY
-    //PROJECT 3: ENABLE CREATING NEW CARDS
+    //PROJECT 1: MAKE TOP AREA DISPLAY POPULATE CORRECTLY
+    //"Edit Cards" while time field is engaged causes crash due to main thread conflict but Genau! button works
+    //PROJECT 2: ENABLE CREATING NEW CARDS
+    //PROJECT 3: Don't double draw new cards (inbound segue and newCardToEdit())
+    //PROJECT 4: POST TO SERVER
+    //project 5: I suspect game round times are bad with Ints vs Floats
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -71,6 +74,7 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func newCardToEdit() {
         if deckToEdit.gameDeck.count > 0 {
             cardToEdit = deckToEdit.drawRandomCard()
+            //I think this is trying to load the text before the card is drawn?
             targetWord.text = cardToEdit.targetWord
             targetEnglish.text = cardToEdit.englishHint
             targetDifficulty.text = "\(cardToEdit.targetDifficulty)"
@@ -78,9 +82,17 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    @IBAction func createNewCard(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Haha, Guess What Doesn't Work Yet?", message: "...new cards, obviously", preferredStyle: .alert)
+        let failure = UIAlertAction(title: "Bummer!", style: .cancel, handler: { (action) -> Void in
+        })
+        alertController.addAction(failure)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func saveCard() {
         cardToSave = cardToEdit.jsonifyCard()
-
+        
         if JSONSerialization.isValidJSONObject(cardToSave) {
             print("CARD is valid JSON")
         } else {
@@ -88,66 +100,16 @@ class EditCardsVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func postToServer(savedCard: PlayingCard) {
-        
-        //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
-        
-        //let parameters = ["name": nametextField.text, "password": passwordTextField.text] as Dictionary<String, String>
-        //let saveCard = savedCard as! NSDictionary
-        
-        print("STEP 1")
-        let url = URL(string: "http://hollyanderic.com/TabooServer/cards2.php")!
-        
-        //create the session object
-        let session = URLSession.shared
-        print("STEP 2")
-        //now create the URLRequest object using the url object
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST" //set http method as POST
-        print("STEP 3")
-        do {
-            print("STEP 4")
-            request.httpBody = try JSONSerialization.data(withJSONObject: saveCard, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
-            print("STEP 5")
-            
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        //create dataTask using the session object to send data to the server
-        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
-            guard error == nil else {
-                return
-            }
-            
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                //create json object from data
-                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    print("PASSED SERIALIAZATION: ", json)
-                    // handle json...
-                } else {
-                    print("FAILED SERIALIZATION")
-                }
-                
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        })
-        task.resume()
-    }
-    
-    
     @IBAction func editCardSaveButton(_ sender: UIButton) {
-        fakeField?.becomeFirstResponder()
         saveCard()
         newCardToEdit()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToSettings" {
+            if let gameSettingsVC = segue.destination as? GameSettingsVC {
+                gameSettingsVC.gameSettings = gameSettings
+            }
+        }
     }
 }
